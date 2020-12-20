@@ -29,5 +29,11 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'instagram'=>[
+        'key'=>env('INSTAGRAM_APP_KEY'),
+        'secret'=>env('INSTAGRAM_APP_SECRET'),
+        'callback'=>env('INSTAGRAM_APP_CALLBACK'),
+        'token'=>env('INSTAGRAM_SECRET_TOKEN'),
+    ]
 
 ];
