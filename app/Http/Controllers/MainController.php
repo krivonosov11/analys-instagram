@@ -30,7 +30,11 @@ class MainController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-        $account = $api->getUserByName($data['link']);
+        $account = $api->getUserByName($data['username']);
+        if (empty($account)) {
+            return redirect()->back()->withErrors(['username'=>'Account not found']);
+        }
+
         $profile = $profileRepository->getByColumn($account->getId(), 'instagram_id');
         if (empty($profile)) {
             $profile = $profileRepository->create([
@@ -86,7 +90,7 @@ class MainController extends Controller
     public function makeValidator(array $data)
     {
         return Validator::make($data, [
-            'link' => 'required'
+            'username' => 'required'
         ]);
 
 

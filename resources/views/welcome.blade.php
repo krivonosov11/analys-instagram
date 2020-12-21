@@ -1,6 +1,6 @@
 @extends('layouts.fullLayoutMaster')
 {{-- title --}}
-@section('title','Login Page')
+@section('title','Instagram Analytic')
 {{-- page scripts --}}
 @section('page-styles')
     <link rel="stylesheet" type="text/css" href="{{asset('css/pages/authentication.css')}}">
@@ -26,9 +26,9 @@
                                     <form method="POST" action="{{route('start')}}">
                                         @csrf
                                         <div class="form-group mb-50">
-                                            <label class="text-bold-600" for="email">Instagram link</label>
-                                            <input id="link" required type="text" class="form-control @error('link') is-invalid @enderror" name="link" value="{{ old('link') }}"  autocomplete="link" autofocus placeholder="Link">
-                                            @error('link')
+                                            <label class="text-bold-600" for="email">Instagram username</label>
+                                            <input id="username" required type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}"  autocomplete="link" autofocus placeholder="Username">
+                                            @error('username')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
