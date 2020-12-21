@@ -15,7 +15,7 @@ class CreateDbStrucuture extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->integer('instagram_id');
+            $table->string('instagram_id', 255);
             $table->string('picture');
             $table->string('name');
             $table->string('full_name');
@@ -36,7 +36,7 @@ class CreateDbStrucuture extends Migration
         Schema::create('profile_posts_activity', function (Blueprint $table){
             $table->id();
             $table->integer('profile_id');
-            $table->integer('instagram_id');
+            $table->string('instagram_id', 255);
             $table->timestamp('create_date');
             $table->string('link',255);
             $table->string('image_url',255);

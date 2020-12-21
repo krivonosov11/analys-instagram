@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $profile_id
  * @property string $type
- * @property int $instagram_id
+ * @property string $instagram_id
  * @property string $create_date
  * @property string $link
  * @property string $image_url

@@ -6,6 +6,7 @@ use App\Repositories\ProfileActivityRepository;
 use App\Repositories\ProfilePostsActivityRepository;
 use App\Repositories\ProfileRepository;
 use App\Services\InstagramApi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,7 +31,7 @@ class MainController extends Controller
         }
 
         $account = $api->getUserByName($data['link']);
-        $profile = $profileRepository->getByColumn('instagram_id', $account->getId());
+        $profile = $profileRepository->getByColumn($account->getId(), 'instagram_id');
         if (empty($profile)) {
             $profile = $profileRepository->create([
                 'instagram_id' => $account->getId(),
@@ -44,7 +45,7 @@ class MainController extends Controller
 
         if ($profile->id) {
             $profileActivity = $profileActivityRepository->getByProfileIdAndTime($profile->id);
-            if (empty($profileActivity)) {
+            if ($profileActivity->count() == 0) {
                 $profileActivityRepository->create([
                     'profile_id' => $profile->id,
                     'follows' => $account->getFollowsCount(),
@@ -54,7 +55,7 @@ class MainController extends Controller
             }
 
             $profilePostsActivity = $profilePostsActivityRepository->getByProfileIdAndTime($profile->id);
-            if (empty($profilePostsActivity)) {
+            if ($profilePostsActivity->count() == 0) {
                 $limit = $account->getMediaCount();
                 if ($limit > config('services.instagram.limit')) {
                     $limit = config('services.instagram.limit');
@@ -65,7 +66,7 @@ class MainController extends Controller
                         'profile_id' => $profile->id,
                         'type' => $post->getType(),
                         'instagram_id' => $post->getId(),
-                        'create_date' => $post->getCreatedTime(),
+                        'create_date' => Carbon::parse($post->getCreatedTime())->format('Y-m-d H:i:s'),
                         'link' => $post->getLink(),
                         'image_url' => $post->getImageStandardResolutionUrl(),
                         'video_url' => $post->getVideoLowResolutionUrl(),

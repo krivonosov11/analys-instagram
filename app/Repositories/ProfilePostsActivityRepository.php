@@ -22,6 +22,6 @@ class ProfilePostsActivityRepository extends BaseRepository
 
     public function getByProfileIdAndTime(int $profile_id)
     {
-        return $this->query->where('profile_id', $profile_id)->where('created_at', '>=',Carbon::now()->format('Y-m-d').' 00:00:00')->first();
+        return $this->newQuery()->where('profile_id', $profile_id)->where('created_at', Carbon::now()->format('Y-m-d').' 00:00:00', '>=')->get();
     }
 }
