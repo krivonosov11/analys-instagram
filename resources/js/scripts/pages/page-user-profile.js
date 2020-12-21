@@ -1,6 +1,6 @@
 /*=========================================================================================
     File Name: page-user-profile.js
-    Description: User Profile jQuery Intialization
+    Description: User ProfileDto jQuery Intialization
     --------------------------------------------------------------------------------------
     Item Name: Frest HTML Admin Template
     Version: 1.0
