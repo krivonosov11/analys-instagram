@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Repositories\ProfileActivityRepository;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -34,7 +33,7 @@ class Profile extends Model
 
     public function activities()
     {
-        return $this->hasMany(ProfileActivityRepository::class);
+        return $this->hasMany(ProfileActivity::class);
     }
 
     public function activityPosts()

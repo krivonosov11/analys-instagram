@@ -42,10 +42,10 @@ class CreateDbStrucuture extends Migration
             $table->string('image_url',255);
             $table->string('video_url',255);
             $table->text('content');
-            $table->text('count_likes');
-            $table->text('count_comments');
-            $table->text('location');
-            $table->text('type');
+            $table->integer('count_likes');
+            $table->integer('count_comments');
+            $table->string('location', 255);
+            $table->string('type');
             $table->timestamps();
         });
     }

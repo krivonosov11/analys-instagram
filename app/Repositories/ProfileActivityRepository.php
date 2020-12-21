@@ -25,4 +25,5 @@ class ProfileActivityRepository extends BaseRepository
     {
         return $this->newQuery()->where('profile_id', $profile_id)->where('created_at', Carbon::now()->format('Y-m-d').' 00:00:00','>=')->get();
     }
+
 }

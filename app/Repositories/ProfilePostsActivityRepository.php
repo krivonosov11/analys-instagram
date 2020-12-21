@@ -24,4 +24,19 @@ class ProfilePostsActivityRepository extends BaseRepository
     {
         return $this->newQuery()->where('profile_id', $profile_id)->where('created_at', Carbon::now()->format('Y-m-d').' 00:00:00', '>=')->get();
     }
+
+    public function getBestPost(int $profile_id)
+    {
+        return $this->newQuery()->where('profile_id', $profile_id)->orderBy('count_likes', 'DESC')->first();
+    }
+
+    public function getLastPosts(int $profile_id)
+    {
+        return $this->newQuery()->where('profile_id', $profile_id)->get()->sortByDesc('create_date')->slice(0, 4);
+    }
+
+    public function getCountItems(int $profile_id, string $item)
+    {
+        return ProfilePostsActivity::query()->where('profile_id', $profile_id)->groupBy('created_at')->sum($item);
+    }
 }
