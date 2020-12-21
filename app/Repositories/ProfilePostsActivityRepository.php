@@ -40,4 +40,9 @@ class ProfilePostsActivityRepository extends BaseRepository
         return ProfilePostsActivity::query()->where('profile_id', $profile_id)->groupBy('created_at')->sum($item);
     }
 
+    public function getPostsLastTime(int $profile_id)
+    {
+        return ProfilePostsActivity::query()->where('profile_id', $profile_id)->get();
+    }
+
 }

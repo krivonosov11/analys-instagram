@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::post('/main/start', 'MainController@start')->name('start');
 Route::get('/profile/{username}', 'ProfileController@index')->name('profile.show');
+Route::get('/profile/{username}/posts', 'ProfileController@posts')->name('profile.posts');

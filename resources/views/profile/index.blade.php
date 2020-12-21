@@ -50,7 +50,7 @@
                                         <i class="bx bx-user font-medium-5"></i>
                                     </div>
                                     <div>
-                                        <div class="text-muted line-ellipsis">Following</div>
+                                        <div class="text-muted line-ellipsis">Followers</div>
                                         <h3 class="mb-0">{{$profile->activities->last()->followers}}</h3>
                                     </div>
                                 </div>

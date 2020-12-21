@@ -33,13 +33,13 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation"
                 data-icon-style="lines">
                 <li class="nav-item">
-                    <a href="/profile/{{$profile->name}}">
+                    <a href="{{route('profile.show', $profile->name)}}">
                         <i class="menu-livicon" data-icon="users"></i>
                         <span class="menu-title">User</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{route('profile.posts', $profile->name)}}">
                         <i class="menu-livicon" data-icon="comments"></i>
                         <span class="menu-title">User Posts</span>
                     </a>
