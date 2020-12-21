@@ -71,10 +71,10 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-end">
-                                <div class="dashboard-content-left">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="col-8 dashboard-content-left">
                                     <p>
-                                        {!! mb_substr($bestPost->content, 0, 300, 'UTF-8').'...' !!}
+                                        {!! mb_substr($bestPost->content, 0, 150, 'UTF-8').'...' !!}
                                     </p>
                                     <h3 class="text-primary font-large-2 text-bold-500">
                                         {{$bestPost->count_likes}}
@@ -86,7 +86,7 @@
                                     <a href="{{$bestPost->link}}" target="_blank" class="btn btn-primary glow">View
                                         Post</a>
                                 </div>
-                                <div class="dashboard-content-right">
+                                <div class="col-4 dashboard-content-right">
                                     <img src="{{$bestPost->image_url}}" height="220" width="220"
                                          class="img-fluid round"
                                          alt="Dashboard Ecommerce"/>
@@ -98,18 +98,18 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-xl-8 col-12 dashboard-order-summary">
+            <div class="col-12 dashboard-order-summary mb-2">
                 <div class="card">
                     <div class="row">
                         <!-- Order Summary Starts -->
                         <div class="col-md-8 col-12 order-summary border-right pr-md-0">
                             <div class="card mb-0">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h4 class="card-title">Order Summary</h4>
+                                    <h4 class="card-title">Dynamic Profile</h4>
                                 </div>
                                 <div class="card-content">
-                                    <div class="card-body p-0">
-                                        <div id="order-summary-chart"></div>
+                                    <div class="card-body">
+                                        <div id="line-area-chart"></div>
                                     </div>
                                 </div>
                             </div>
@@ -159,6 +159,11 @@
                                         <small class="text-muted">{{$profile->activityPosts->last()->created_at->format('Y/m/d H:i:s')}}</small>
                                         <span class="text-primary text-bold-500">{{$sumLikes}}</span>
                                     </div>
+                                    <div class="card-footer border-top pb-0">
+                                        <h5>Total Comments</h5>
+                                        <small class="text-muted">{{$profile->activityPosts->last()->created_at->format('Y/m/d H:i:s')}}</small>
+                                        <span class="text-primary text-bold-500">{{$sumComments}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +171,7 @@
                 </div>
             </div>
             <!-- Latest Update Starts -->
-            <div class="col-xl-4 col-md-6 col-12 dashboard-latest-update">
+            <div class="col-12 dashboard-latest-update">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center pb-50">
                         <h4 class="card-title">Last Posts</h4>
@@ -180,15 +185,15 @@
                                         <div class="list-left d-flex">
                                             <div class="list-icon mr-1">
                                                 <div class="avatar bg-rgba-primary m-0">
-                                                    <img src="{{$postUser->image_url}}" alt="" width="50" height="50">
+                                                    <img src="{{$postUser->image_url}}" alt="" width="100" height="100">
                                                 </div>
                                             </div>
                                             <div class="list-content">
                                                 <span
-                                                    class="list-title">{!! mb_substr($postUser->content, 0, 200, 'UTF-8').'...' !!}</span>
+                                                    class="list-title">{!! mb_substr($postUser->content, 0, 500, 'UTF-8').'...' !!}</span>
                                             </div>
                                         </div>
-                                        <div>
+                                        <div class="ml-5">
                                             <div class="d-flex">
                                                 <b style="width: 30px">{{$postUser->count_likes}}</b>
                                                 <i class="bx bxs-heart"></i>
@@ -217,5 +222,51 @@
 
 @section('page-scripts')
     <script src="{{asset('js/scripts/pages/dashboard-ecommerce.js')}}"></script>
-@endsection
+    <script type="text/javascript">
+        var $primary = '#5A8DEE',
+            $success = '#39DA8A',
+            $danger = '#FF5B5C',
+            $warning = '#FDAC41',
+            $info = '#00CFDD',
+            $label_color_light = '#E6EAEE';
 
+        var themeColors = [$primary, $warning, $danger, $success, $info];
+
+
+        $(document).ready(function (e){
+            // Line Area Chart
+            // ----------------------------------
+            var lineAreaOptions = {
+                chart: {
+                    height: 350,
+                    type: 'area',
+                },
+                colors: themeColors,
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth'
+                },
+                series: {!! json_encode($statistic['series']) !!},
+                legend: {
+                    offsetY: -10
+                },
+                xaxis: {
+                    type: 'datetime',
+                    categories: {!! json_encode($statistic['categories']) !!},
+                },
+                tooltip: {
+                    x: {
+                        format: 'dd/MM/yy HH:mm'
+                    },
+                }
+            }
+            var lineAreaChart = new ApexCharts(
+                document.querySelector("#line-area-chart"),
+                lineAreaOptions
+            );
+            lineAreaChart.render();
+        });
+    </script>
+@endsection

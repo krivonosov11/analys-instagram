@@ -22,7 +22,7 @@ class ProfilePostsActivityRepository extends BaseRepository
 
     public function getByProfileIdAndTime(int $profile_id)
     {
-        return $this->newQuery()->where('profile_id', $profile_id)->where('created_at', Carbon::now()->format('Y-m-d').' 00:00:00', '>=')->get();
+        return $this->newQuery()->where('profile_id', $profile_id)->where('created_at', Carbon::now()->format('Y-m-d') . ' 00:00:00', '>=')->get();
     }
 
     public function getBestPost(int $profile_id)
@@ -39,4 +39,5 @@ class ProfilePostsActivityRepository extends BaseRepository
     {
         return ProfilePostsActivity::query()->where('profile_id', $profile_id)->groupBy('created_at')->sum($item);
     }
+
 }

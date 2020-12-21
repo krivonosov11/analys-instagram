@@ -11,6 +11,7 @@ class ProfileController extends Controller
 {
     public function index(
         ProfileRepository $profileRepository,
+        ProfileActivityRepository $profileActivityRepository,
         ProfilePostsActivityRepository $profilePostsActivityRepository,
         string $username
     )
@@ -23,7 +24,9 @@ class ProfileController extends Controller
         $bestPost = $profilePostsActivityRepository->getBestPost($profile->id);
         $lastPosts = $profilePostsActivityRepository->getLastPosts($profile->id);
         $sumLikes = $profilePostsActivityRepository->getCountItems($profile->id, 'count_likes');
+        $sumComments = $profilePostsActivityRepository->getCountItems($profile->id, 'count_comments');
+        $statistic = $profileActivityRepository->getStatistic($profile->id);
 
-        return view('profile.index', compact('profile', 'bestPost', 'lastPosts', 'sumLikes'));
+        return view('profile.index', compact('profile', 'bestPost', 'lastPosts', 'sumLikes', 'sumComments', 'statistic'));
     }
 }
