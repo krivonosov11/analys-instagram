@@ -45,13 +45,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{route('profile.dynamic', $profile->name)}}">
                         <i class="menu-livicon" data-icon="calendar"></i>
                         <span class="menu-title">User Dynamic</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{route('profile.with', $profile->name)}}">
                         <i class="menu-livicon" data-icon="grid"></i>
                         <span class="menu-title">Compare profile</span>
                     </a>

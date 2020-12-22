@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::post('/main/start', 'MainController@start')->name('start');
 Route::get('/profile/{username}', 'ProfileController@index')->name('profile.show');
 Route::get('/profile/{username}/posts', 'ProfileController@posts')->name('profile.posts');
+Route::get('/profile/{username}/dynamic', 'ProfileController@dynamic')->name('profile.dynamic');
+Route::get('/profile/{username}/with', 'ProfileController@with')->name('profile.with');
+Route::get('/profile/{username}/with/{with}', 'ProfileController@withUser')->name('profile.withUser');

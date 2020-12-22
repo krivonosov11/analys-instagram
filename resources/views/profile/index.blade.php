@@ -156,12 +156,12 @@
                                     </div>
                                     <div class="card-footer border-top pb-0">
                                         <h5>Total Likes</h5>
-                                        <small class="text-muted">{{$profile->activityPosts->last()->created_at->format('Y/m/d H:i:s')}}</small>
+                                        <small class="text-muted">{{$profile->activityPosts->last()->created_at->format('Y/m/d')}}</small>
                                         <span class="text-primary text-bold-500">{{$sumLikes}}</span>
                                     </div>
                                     <div class="card-footer border-top pb-0">
                                         <h5>Total Comments</h5>
-                                        <small class="text-muted">{{$profile->activityPosts->last()->created_at->format('Y/m/d H:i:s')}}</small>
+                                        <small class="text-muted">{{$profile->activityPosts->last()->created_at->format('Y/m/d')}}</small>
                                         <span class="text-primary text-bold-500">{{$sumComments}}</span>
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@
                 </div>
             </div>
             <!-- Latest Update Starts -->
-            <div class="col-12 dashboard-latest-update">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center pb-50">
                         <h4 class="card-title">Last Posts</h4>
@@ -253,12 +253,12 @@
                     offsetY: -10
                 },
                 xaxis: {
-                    type: 'datetime',
+                    type: 'date',
                     categories: {!! json_encode($statistic['categories']) !!},
                 },
                 tooltip: {
                     x: {
-                        format: 'dd/MM/yy HH:mm'
+                        format: 'dd/MM/yy'
                     },
                 }
             }
